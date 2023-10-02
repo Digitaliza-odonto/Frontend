@@ -1,6 +1,6 @@
 const getApiUrl = () => {
   const storedApiUrl = localStorage.getItem('api');
-  return storedApiUrl ? storedApiUrl : 'https://prontuario-ufpel-backend.onrender.com';
+  return storedApiUrl ? storedApiUrl : 'https://ruufpelbot.000webhostapp.com/Prontuario-ufpel/prontuario-ufpel-php-main/api/index.php?rota=';
 };
 
 const sendRequest = async (url, method, data) => {
@@ -8,6 +8,7 @@ const sendRequest = async (url, method, data) => {
     method,
     headers: {
       'Content-Type': 'application/json',
+      'Content-Length': 0
     },
     body: JSON.stringify(data),
   };
@@ -16,9 +17,6 @@ const sendRequest = async (url, method, data) => {
     const response = await fetch(url, options);
     const responseData = await response.json();
 
-    if (!response.ok) {
-      throw responseData;
-    }
 
     return responseData;
   } catch (error) {
